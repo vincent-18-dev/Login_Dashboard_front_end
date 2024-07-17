@@ -5,11 +5,13 @@ interface UserState {
   email: string;
   password: string;
   status: string;
+  isLoggedIn: boolean;
 }
 const initialState: UserState = {
   email: "",
   password: "",
   status: "idle",
+  isLoggedIn: false,
 };
 export const fetchuserLogin = createAsyncThunk<any, UserState>(
   "users/loginStatus",
@@ -26,6 +28,12 @@ export const loginSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchuserLogin.fulfilled, (state, action) => {
       state.status = action.payload.message;
+      state.isLoggedIn = true;
+      console.log("action", action);
+    });
+    builder.addCase(fetchuserLogin.rejected, (state, action) => {
+      state.status = "User Not Found!";
+      state.isLoggedIn = false;
       console.log("action", action);
     });
   },

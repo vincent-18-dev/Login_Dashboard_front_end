@@ -1,13 +1,17 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { fetchuserRegister } from "../feature/userAuth/registerSlice";
 type Inputs = {
-  email: string | number;
-  password: string | number;
+  email: string;
+  password: string;
   username: string;
-  phone: number;
+  phone: number | number;
+  status: string;
+  isLoggedIn: boolean;
 };
 export default function Register() {
+  const dispatch = useDispatch<any>();
   const {
     register,
     handleSubmit,
@@ -19,16 +23,8 @@ export default function Register() {
     const value = {
       ...data,
     };
-    try {
-      const response = await axios.post("http://localhost:3004/register", {
-        value,
-      });
-      console.log(response.data, "Response Data");
-    } catch (error) {
-      console.error(error);
-    }
+    dispatch(fetchuserRegister(value));
     reset();
-    console.log("check_data", data);
   };
   return (
     <div className="bg-[url('./login-background.jpg')] bg-center bg-cover">

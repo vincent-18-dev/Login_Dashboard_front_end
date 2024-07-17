@@ -1,10 +1,14 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { updateuserPassword } from "../feature/userAuth/forgetpasswordSlice";
+import { useDispatch } from "react-redux";
 type Inputs = {
-  email: string | number;
+  email: string;
+  status: string;
+  isLoggedIn: boolean;
 };
 export default function ForgetPassword() {
+  const dispatch = useDispatch<any>();
   const {
     register,
     handleSubmit,
@@ -13,14 +17,10 @@ export default function ForgetPassword() {
   } = useForm<Inputs>();
 
   const formData = async (data: Inputs) => {
-    try {
-      const response = await axios.post("http://localhost:3004/forget-password", {
-        email: data?.email,
-      });
-      console.log(response.data, "Response Data");
-    } catch (error) {
-      console.error(error);
-    }
+    const value = {
+      ...data,
+    };
+    dispatch(updateuserPassword(value));
     reset();
   };
   return (

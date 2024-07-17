@@ -1,11 +1,12 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { fetchuserLogin } from "../feature/userAuth/loginSlice";
+import { fetchuserLogin } from "../feature/userAuth/userauthSlice";
 import { useDispatch } from "react-redux";
 type Inputs = {
   email: string;
   password: string;
   status: string;
+  isLoggedIn: boolean;
 };
 export default function LoginFunction() {
   const dispatch = useDispatch<any>();
