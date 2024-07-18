@@ -29,7 +29,7 @@ export const loginSlice = createSlice({
     builder.addCase(fetchuserLogin.fulfilled, (state, action) => {
       state.status = action.payload.message;
       state.isLoggedIn = true;
-      console.log("action", action);
+      console.log("action", action.payload.message);
     });
     builder.addCase(fetchuserLogin.rejected, (state, action) => {
       state.status = "User Not Found!";

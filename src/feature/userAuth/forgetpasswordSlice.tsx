@@ -2,19 +2,23 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 interface UserState {
   email: string;
+  password: string;
+  confirmpassword: string;
   status: string;
   isLoggedIn: boolean;
 }
 const initialState: UserState = {
   email: "",
   status: "idle",
+  password: "",
+  confirmpassword: "",
   isLoggedIn: false,
 };
 
 export const updateuserPassword = createAsyncThunk<any, UserState>(
   "users/updateuserpasswordStatus",
   async (payload) => {
-    const response = await axios.post(
+    const response = await axios.put(
       "http://localhost:3004/forget-password",
       payload
     );

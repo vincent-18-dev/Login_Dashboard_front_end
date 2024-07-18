@@ -4,6 +4,8 @@ import { updateuserPassword } from "../feature/userAuth/forgetpasswordSlice";
 import { useDispatch } from "react-redux";
 type Inputs = {
   email: string;
+  password: string;
+  confirmpassword: string;
   status: string;
   isLoggedIn: boolean;
 };
@@ -13,6 +15,7 @@ export default function ForgetPassword() {
     register,
     handleSubmit,
     reset,
+    getValues,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -43,6 +46,45 @@ export default function ForgetPassword() {
               />
               <p className="absolute top-28 w-full text-center font-semibold text-red-600">
                 {errors.email && <span>This field is required</span>}
+              </p>
+            </div>
+            <div className="py-2 flex flex-col justify-center align-middle gap-4 relative">
+              <label
+                className="text-white text-md font-semibold"
+                htmlFor="email"
+              >
+                Password*
+              </label>
+              <input
+                className="p-3 focus:outline-none"
+                type="password"
+                placeholder="Enter Your Password"
+                {...register("password", { required: true })}
+              />
+              <p className="absolute top-28 w-full text-center font-semibold text-red-600">
+                {errors.email && <span>This field is required</span>}
+              </p>
+            </div>
+            <div className="py-2 flex flex-col justify-center align-middle gap-4 relative">
+              <label
+                className="text-white text-md font-semibold"
+                htmlFor="email"
+              >
+                Confirm Password*
+              </label>
+              <input
+                className="p-3 focus:outline-none"
+                type="password"
+                placeholder="Confirm Password"
+                {...register("confirmpassword", {
+                  validate: (match) => {
+                    const password = getValues("password");
+                    return match === password || "Passwords should match!";
+                  },
+                })}
+              />
+              <p className="absolute top-28 w-full text-center font-semibold text-red-600">
+                <span>{errors.confirmpassword?.message}</span>
               </p>
             </div>
             <div className="flex justify-between mt-5">

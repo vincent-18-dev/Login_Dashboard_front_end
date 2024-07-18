@@ -35,7 +35,7 @@ export const registerSlice = createSlice({
     builder.addCase(fetchuserRegister.fulfilled, (state, action) => {
       state.status = action.payload.message;
       state.isLoggedIn = true;
-      console.log("action", action);
+      console.log("action", action.payload.message);
     });
     builder.addCase(fetchuserRegister.rejected, (state, action) => {
       state.status = "User profile created failed!";
