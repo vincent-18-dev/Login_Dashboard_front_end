@@ -16,7 +16,7 @@ const initialState: UserState = {
 export const fetchuserLogin = createAsyncThunk<any, UserState>(
   "users/loginStatus",
   async (payload) => {
-    const response = await axios.post("http://localhost:3004/login", payload);
+    const response = await axios.post("https://login-dashboard-backend.vercel.app/login", payload);
     return response.data;
   }
 );
