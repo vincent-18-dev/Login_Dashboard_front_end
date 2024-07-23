@@ -21,7 +21,7 @@ export const fetchuserRegister = createAsyncThunk<any, UserState>(
   "users/registerStatus",
   async (payload) => {
     const response = await axios.post(
-      "https://login-dashboard-backend.vercel.app/register",
+      "https://backend-api-kappa-bay.vercel.app/register",
       payload
     );
     return response.data;
