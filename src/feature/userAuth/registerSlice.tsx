@@ -20,10 +20,8 @@ const initialState: UserState = {
 export const fetchuserRegister = createAsyncThunk<any, UserState>(
   "users/registerStatus",
   async (payload) => {
-    console.log(payload, "payload");
-
     const response = await axios.post(
-      "https://backend-api-kappa-bay.vercel.app/register",
+      "https://login-dashboard-backend.vercel.app/register",
       payload
     );
     return response.data;

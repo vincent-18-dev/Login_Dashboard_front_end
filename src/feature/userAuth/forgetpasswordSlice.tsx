@@ -19,7 +19,7 @@ export const updateuserPassword = createAsyncThunk<any, UserState>(
   "users/updateuserpasswordStatus",
   async (payload) => {
     const response = await axios.put(
-      "https://backend-api-kappa-bay.vercel.app/forget-password",
+      "https://login-dashboard-backend.vercel.app/forget-password",
       payload
     );
     return response.data;
